@@ -12,7 +12,7 @@
 
 
 
-function searchQuery() {
+function searchQuery(weatherLocationData) {
     // queryURL is the url we'll use to query the API
     let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=";
   
@@ -22,7 +22,7 @@ function searchQuery() {
       .val()
       .trim();
 
-    const urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
+    let urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
   
     queryURL = queryURL + searchInput + urlApiKey;
   
@@ -32,7 +32,20 @@ console.log(queryURL);
     return queryURL;
   }
 
+function locationData() {
+    locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?lat="
 
+    let latitude = queryURL.main.lat;
+
+    let longitude = "&lon=" + queryURL.main.lon;
+
+    const urlApiKey = "&appid=" + "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
+    
+    newQueryURL = locationQueryURL + latitude + longitude + urlApiKey;
+
+    console.log(newQueryURL)
+    return newQueryURL;
+}
 // // console.log("input")
 // function searchHistory(weatherData) {
 //     const weatherLocation = weatherData.response[i];
@@ -46,14 +59,14 @@ console.log(queryURL);
 
 historyCount = 0;
 
-function updatePage(weatherData) {
+function updatePage(locationData) {
     const searchHistory = $("#search-history");
 
-    // console.log(weatherData);
+    console.log(locationData);
     // console.log(searchHistory);
 
-    for (let i = 0; i < weatherData.response; i++) {
-        const weatherLocation = weatherData.response[i];
+    for (let i = 0; i < locationData.response; i++) {
+        const weatherLocation = locationData.response[i];
         
         const historyButton = $("<button>").text(`${historyCount}. ${weatherLocation}`);
 
@@ -67,7 +80,29 @@ function updatePage(weatherData) {
         // historyList.append(historyButton);
         historyList.append(historyButton);
         // historyButton.append(historyList);
-    }
+    }    
+    
+    locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?lat="
+
+    // locationData = locationData.lat
+
+    let latitude = locationData[0].lat;
+
+    let longitude = "&lon=" + locationData[0].lon;
+
+    urlApiKey =  "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
+    
+    const newQueryURL = locationQueryURL + latitude + longitude + urlApiKey;
+
+    console.log(newQueryURL)
+    // return newQueryURL;
+
+    $.ajax({
+        url: newQueryURL,
+        method: "GET"
+      }).then(function(data) {
+console.log(data)
+      });
 }
 
 $("#search-button").on("click", function(event) {
@@ -90,7 +125,9 @@ $("#search-button").on("click", function(event) {
     }).then(updatePage);
   });
   
+function displayData(displayData) {
 
+}
 
 // function searchQuery() {
 // // queryURL is the url we'll use to query the API
