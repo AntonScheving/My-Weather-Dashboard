@@ -128,7 +128,7 @@ $.ajax({
   const tempFarenheit = "Farenheit: " + weatherData.main.temp;
   const tempFeelsFarenheit = "Feels like: " + weatherData.main.feels_like;
   const wind = "Wind speed: " + weatherData.wind.speed;
-  const humidity = "Humidity: " + weatherData.main.humidity;
+  const humidity = "Humidity: " + weatherData.main.humidity + "%";
   document.getElementById("city-name").innerText = cityName;
   document.getElementById("weather-icon").innerHTML = icon;
   document.getElementById("weather-text").innerHTML = weatherDescription;
@@ -143,7 +143,72 @@ $.ajax({
 $.ajax({
   url: fiveDayData,
   method: "GET"
-}).then(function(fiveDayWeatherData) {})
+}).then(function(fiveDayWeatherData) {
+  // Day 1 (tomorrow)
+  tomorrowDate = moment().add(1, 'days').calendar();;
+  document.getElementById("tomorrow-date").innerText = tomorrowDate;
+
+  const tomorrowTemp = "Farenheit: " + fiveDayWeatherData.list[3].main.temp;
+  document.getElementById("tomorrow-temp").innerText = tomorrowTemp;
+
+  const tomorrowWind = "Wind: " + fiveDayWeatherData.list[3].wind.speed;
+  document.getElementById("tomorrow-wind").innerText = tomorrowWind;
+
+  const tomorrowHumidity = "Humidity: " + fiveDayWeatherData.list[3].main.humidity + "%";
+  document.getElementById("tomorrow-humidity").innerText = tomorrowHumidity;
+
+  // Day 2
+  dayTwoDate = moment().add(2, 'days').calendar();;
+  document.getElementById("day-two-date").innerText = dayTwoDate;
+
+  const dayTwoTemp = "Farenheit: " + fiveDayWeatherData.list[4].main.temp;
+  document.getElementById("day-two-temp").innerText = dayTwoTemp;
+
+  const dayTwoWind = "Wind: " + fiveDayWeatherData.list[4].wind.speed;
+  document.getElementById("day-two-wind").innerText = dayTwoWind;
+
+  const dayTwoHumidity = "Humidity: " + fiveDayWeatherData.list[4].main.humidity + "%";
+  document.getElementById("day-two-humidity").innerText = dayTwoHumidity;
+
+  // Day 3
+  const dayThreeDate = moment().add(3, 'days').calendar();;
+  document.getElementById("day-three-date").innerText = dayThreeDate;
+
+  const dayThreeTemp = "Farenheit: " + fiveDayWeatherData.list[5].main.temp;
+  document.getElementById("day-three-temp").innerText = dayThreeTemp;
+
+  const dayThreeWind = "Wind: " + fiveDayWeatherData.list[5].wind.speed;
+  document.getElementById("day-three-wind").innerText = dayThreeWind;
+
+  const dayThreeHumidity = "Humidity: " + fiveDayWeatherData.list[5].main.humidity + "%";
+  document.getElementById("day-three-humidity").innerText = dayThreeHumidity;
+
+  // Day 4
+  const dayFourDate = moment().add(3, 'days').calendar();;
+  document.getElementById("day-four-date").innerText = dayFourDate;
+
+  const dayFourTemp = "Farenheit: " + fiveDayWeatherData.list[6].main.temp;
+  document.getElementById("day-four-temp").innerText = dayFourTemp;
+
+  const dayFourWind = "Wind: " + fiveDayWeatherData.list[6].wind.speed;
+  document.getElementById("day-four-wind").innerText = dayFourWind;
+
+  const dayFourHumidity = "Humidity: " + fiveDayWeatherData.list[6].main.humidity + "%";
+  document.getElementById("day-four-humidity").innerText = dayFourHumidity;
+
+  // Day 5
+  const dayFiveDate = moment().add(3, 'days').calendar();;
+  document.getElementById("day-five-date").innerText = dayFiveDate;
+
+  const dayFiveTemp = "Farenheit: " + fiveDayWeatherData.list[7].main.temp;
+  document.getElementById("day-five-temp").innerText = dayFiveTemp;
+
+  const dayFiveWind = "Wind: " + fiveDayWeatherData.list[7].wind.speed;
+  document.getElementById("day-five-wind").innerText = dayFiveWind;
+
+  const dayFiveHumidity = "Humidity: " + fiveDayWeatherData.list[7].main.humidity + "%";
+  document.getElementById("day-five-humidity").innerText = dayFiveHumidity;
+})
 
 
 
