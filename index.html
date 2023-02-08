@@ -65,19 +65,118 @@
               </div>
             </div>
         </section>
-        <section id="forecast" class="row mt-3" role="region" aria-live="polite">
+        <!-- 5 Day forecast -->
+        
+        <div id="forecast" role="region" aria-live="polite">
           <div id="five-day-forecast">
             <h2 class="h3 text-center">5-Day Forecast</h2>
             <div id="forecast-cards" class="d-flex justify-content-around flex-wrap">
-              <div id="forecast-section" class="card mt-5">
-                <div class="card-header">
-                  5-Day Forecast:
+
+
+              <!-- <div id="forecast-section" class="card">
+                <div id="tomorrow-date" class="card-header">
                 </div>
-                <ul id="forecast-list" class="list-group list-group-flush"></ul>
+                <ul id="forecast-list" class="list-group list-group-flush">
+                  
+                <li id="tomorrow-temp"></li>
+                <li id="tomorrow-wind"></li>
+                <li id="tomorrow-humidity"></li>
+                </ul>
+              </div>
+
+             
+              <div class="card">
+                <div id="day-two-date" class="card-header">
+                </div>
+                <ul id="forecast-list" class="list-group list-group-flush">
+                <li id="day-two-temp"></li>
+                <li id="day-two-wind"></li>
+                <li id="day-two-humidity"></li>
+                </ul>
+                
+                
+              <div class="card">
+                <div id="day-three-date" class="card-header">
+                </div>
+                <ul id="forecast-list" class="list-group list-group-flush">
+                <li id="day-three-temp"></li>
+                <li id="day-three-wind"></li>
+                <li id="day-three-humidity"></li>
+                </ul>
+                
+
+                  
+              <div class="card">
+                <div id="day-three-date" class="card-header">
+                </div>
+                <ul id="forecast-list" class="list-group list-group-flush">
+                <li id="day-three-temp"></li>
+                <li id="day-three-wind"></li>
+                <li id="day-three-humidity"></li>
+                </ul>
+              </div> -->
+            
+              <div class="container">
+                <div class="row">
+                  <div class="col-md-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <h6 class="card-title" id="tomorrow-date"></h6>
+                        <p class="card-text" id="tomorrow-temp"></p>
+                        <p class="card-text" id="tomorrow-wind"></p>
+                        <p class="card-text" id="tomorrow-humidity"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <!-- Day 2 -->
+                        <h6 class="card-title" id="day-two-date"></h6>
+                        <p class="card-text" id="day-two-temp"></p>
+                        <p class="card-text" id="day-two-wind"></p>
+                        <p class="card-text" id="day-two-humidity"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <!-- Day 3 -->
+                        <h6 class="card-title" id="day-three-date"></h6>
+                        <p class="card-text" id="day-three-temp"></p>
+                        <p class="card-text" id="day-three-wind"></p>
+                        <p class="card-text" id="day-three-humidity"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card">
+                      <div class="card-body"> 
+                        <!-- Day 4 -->
+                        <h6 class="card-title" id="day-four-date"></h6>
+                        <p class="card-text" id="day-four-temp"></p>
+                        <p class="card-text" id="day-four-wind"></p>
+                        <p class="card-text" id="day-four-humidity"></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-2">
+                    <div class="card">
+                      <div class="card-body">
+                        <!-- Day 5 -->
+                        <h6 class="card-title" id="day-five-date"></h6>
+                        <p class="card-text" id="day-five-temp"></p>
+                        <p class="card-text" id="day-five-wind"></p>
+                        <p class="card-text" id="day-five-humidity"></p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </div>
     </div>
   </div>
@@ -88,5 +187,4 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
   <script src="assets/script.js"></script>
 </body>
-
 </html>
