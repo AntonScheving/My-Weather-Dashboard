@@ -62,7 +62,7 @@ historyCount = 0;
 function updatePage(locationData) {
     const searchHistory = $("#search-history");
 
-    console.log(locationData);
+    // console.log(locationData);
     // console.log(searchHistory);
 
     for (let i = 0; i < locationData.response; i++) {
@@ -97,13 +97,26 @@ function updatePage(locationData) {
     console.log(newQueryURL)
     // return newQueryURL;
 
-    $.ajax({
-        url: newQueryURL,
-        method: "GET"
-      }).then(function(data) {
-console.log(data)
-      });
-}
+//     $.ajax({
+//         url: newQueryURL,
+//         method: "GET"
+//       }).then(function(weatherData) {
+// console.log(weatherData) {
+//     const locationName = weatherData.name;
+//     $("#lcity-name").text(locationName);
+//   });
+
+$.ajax({
+  url: newQueryURL,
+  method: "GET"
+}).then(function(weatherData) {
+  const cityName = weatherData.name;
+  document.getElementById("city-name") = cityName;
+  // weatherData.name.innerHTML = cityName
+});
+
+      };
+
 
 $("#search-button").on("click", function(event) {
     // This line allows us to take advantage of the HTML "submit" property
@@ -122,36 +135,16 @@ $("#search-button").on("click", function(event) {
     $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(updatePage);
+    }).then(updatePage)
   });
   
-function displayData(displayData) {
-
-}
-
-// function searchQuery() {
-// // queryURL is the url we'll use to query the API
-// let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=&limit=5&appid=";
-
-// // Begin building an object to contain our API call's query parameters
-// // Set the API key
-// // const queryApiKey = { q:  "af6cd0de4ed902410e31681b511a1063" };
-
-
-
-// queryURL.q.append = $("#search-input", "af6cd0de4ed902410e31681b511a1063")
-// .val().trim();
-
-// // queryApiKey.q = $("#search-input")
-// // .val().trim();
-
-
-// console.log(queryApiKey)
-// // console.log("---------------\nURL: " + queryURL + "\n---------------");
-
-// //   console.log(queryURL + $.param(queryApiKey));
-// //   return queryURL + $.param(queryApiKey);
+// function displayCurrentWeather(current) {
+//   document.getElementById("city-name")
+//   const cityName = current.main.name;
+  
+//   current.main.name.innerHTML = cityName
 
 // }
 
-searchQuery()
+
+searchQuery();
