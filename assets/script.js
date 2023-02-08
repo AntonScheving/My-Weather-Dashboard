@@ -97,13 +97,13 @@ function updatePage(locationData) {
     console.log(newQueryURL);
     
     // 5 day forecast query
-    fiveDayQuery = "api.openweathermap.org/data/2.5/forecast?lat="
+    fiveDayQuery = "https://api.openweathermap.org/data/2.5/forecast?lat="
 
     const fiveDayApiKey = "&appid=af6cd0de4ed902410e31681b511a1063"
 
-    const fiveDayData = fiveDayQuery = latitude + longitude + fiveDayApiKey;
+    const fiveDayData = fiveDayQuery + latitude + longitude + fiveDayApiKey;
 
-    
+    console.log(fiveDayData);
     
 
 
