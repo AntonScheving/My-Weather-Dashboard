@@ -94,7 +94,19 @@ function updatePage(locationData) {
     
     const newQueryURL = locationQueryURL + latitude + longitude + urlApiKey;
 
-    console.log(newQueryURL)
+    console.log(newQueryURL);
+    
+    // 5 day forecast query
+    fiveDayQuery = "api.openweathermap.org/data/2.5/forecast?lat="
+
+    const fiveDayApiKey = "&appid=af6cd0de4ed902410e31681b511a1063"
+
+    const fiveDayData = fiveDayQuery = latitude + longitude + fiveDayApiKey;
+
+    
+    
+
+
     // return newQueryURL;
 
 //     $.ajax({
@@ -110,13 +122,36 @@ $.ajax({
   url: newQueryURL,
   method: "GET"
 }).then(function(weatherData) {
-  const cityName = weatherData.name;
-  document.getElementById("city-name") = cityName;
-  // weatherData.name.innerHTML = cityName
+  const cityName = weatherData.name + moment().format(" - Do MMMM YYYY");
+  const icon = weatherData.weather[0].icon;
+  const weatherDescription = weatherData.weather[0].description;
+  const tempFarenheit = "Farenheit: " + weatherData.main.temp;
+  const tempFeelsFarenheit = "Feels like: " + weatherData.main.feels_like;
+  const wind = "Wind speed: " + weatherData.wind.speed;
+  const humidity = "Humidity: " + weatherData.main.humidity;
+  document.getElementById("city-name").innerText = cityName;
+  document.getElementById("weather-icon").innerHTML = icon;
+  document.getElementById("weather-text").innerHTML = weatherDescription;
+  document.getElementById("temperature-farenheit").innerText = tempFarenheit;
+  document.getElementById("temperature-feels-farenheit").innerText = tempFeelsFarenheit;
+  document.getElementById("wind-speed").innerText = wind;
+  document.getElementById("humidity").innerText = humidity;
+
+ 
 });
 
-      };
+$.ajax({
+  url: fiveDayData,
+  method: "GET"
+}).then(function(fiveDayWeatherData) {})
 
+
+
+};
+      
+
+    
+    
 
 $("#search-button").on("click", function(event) {
     // This line allows us to take advantage of the HTML "submit" property

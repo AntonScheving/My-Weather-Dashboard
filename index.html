@@ -47,7 +47,7 @@
 
       <div class="col-lg-9 pb-3">
         <section id="today" class="mt-3" role="region" aria-live="polite">
-          <div id="current-weather" class="d-none">
+          <div id="current-weather">
             <h2 class="h3 text-center">Current Weather</h2>
             <div class="card">
               <div class="card-body">
@@ -56,14 +56,17 @@
                 <p>
                   <i id="weather-icon" class="wi wi-day-sunny"></i>
                 </p>
-                <p id="temperature" class="card-text"></p>
+                <p id="weather-text" class="card-text"></p>
+                <p id="temperature-farenheit" class="card-text"></p>
+                <p id="temperature-feels-farenheit" class="card-text"></p>
+                <p id="temperature-celsius" class="card-text"></p>
                 <p id="humidity" class="card-text"></p>
                 <p id="wind-speed" class="card-text"></p>
               </div>
             </div>
         </section>
         <section id="forecast" class="row mt-3" role="region" aria-live="polite">
-          <div id="five-day-forecast" class="d-none">
+          <div id="five-day-forecast">
             <h2 class="h3 text-center">5-Day Forecast</h2>
             <div id="forecast-cards" class="d-flex justify-content-around flex-wrap">
               <div id="forecast-section" class="card mt-5">
