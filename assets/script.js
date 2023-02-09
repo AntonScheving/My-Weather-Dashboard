@@ -10,6 +10,7 @@
 // to catch an error
 // .catch(err => console.error(err));
 
+const history = [];
 
 
 function searchQuery(weatherLocationData) {
@@ -123,14 +124,19 @@ $.ajax({
   method: "GET"
 }).then(function(weatherData) {
   const cityName = weatherData.name + moment().format(" - Do MMMM YYYY");
-  const icon = weatherData.weather[0].icon;
+  // const icon = weatherData.weather[0].icon;
+  // const icon = $("<img>").attr("src", weatherData.weather[0].icon);
+  // const displayIcon = $("#weather-icon");
+  // displayIcon.append(icon);
+
+
   const weatherDescription = weatherData.weather[0].description;
   const tempFarenheit = "Farenheit: " + weatherData.main.temp;
   const tempFeelsFarenheit = "Feels like: " + weatherData.main.feels_like;
   const wind = "Wind speed: " + weatherData.wind.speed;
   const humidity = "Humidity: " + weatherData.main.humidity + "%";
   document.getElementById("city-name").innerText = cityName;
-  document.getElementById("weather-icon").innerHTML = icon;
+  // document.getElementById("weather-icon").innerHTML = icon;
   document.getElementById("weather-text").innerHTML = weatherDescription;
   document.getElementById("temperature-farenheit").innerText = tempFarenheit;
   document.getElementById("temperature-feels-farenheit").innerText = tempFeelsFarenheit;
@@ -145,7 +151,7 @@ $.ajax({
   method: "GET"
 }).then(function(fiveDayWeatherData) {
   // Day 1 (tomorrow)
-  tomorrowDate = moment().add(1, 'days').calendar();;
+  tomorrowDate = moment().add(1, 'days').format('dddd');
   document.getElementById("tomorrow-date").innerText = tomorrowDate;
 
   const tomorrowTemp = "Farenheit: " + fiveDayWeatherData.list[3].main.temp;
@@ -158,7 +164,7 @@ $.ajax({
   document.getElementById("tomorrow-humidity").innerText = tomorrowHumidity;
 
   // Day 2
-  dayTwoDate = moment().add(2, 'days').calendar();;
+  dayTwoDate = moment().add(2, 'days').format('dddd');
   document.getElementById("day-two-date").innerText = dayTwoDate;
 
   const dayTwoTemp = "Farenheit: " + fiveDayWeatherData.list[4].main.temp;
@@ -171,7 +177,7 @@ $.ajax({
   document.getElementById("day-two-humidity").innerText = dayTwoHumidity;
 
   // Day 3
-  const dayThreeDate = moment().add(3, 'days').calendar();;
+  const dayThreeDate = moment().add(3, 'days').format('dddd');
   document.getElementById("day-three-date").innerText = dayThreeDate;
 
   const dayThreeTemp = "Farenheit: " + fiveDayWeatherData.list[5].main.temp;
@@ -184,7 +190,7 @@ $.ajax({
   document.getElementById("day-three-humidity").innerText = dayThreeHumidity;
 
   // Day 4
-  const dayFourDate = moment().add(3, 'days').calendar();;
+  const dayFourDate = moment().add(4, 'days').format('dddd');
   document.getElementById("day-four-date").innerText = dayFourDate;
 
   const dayFourTemp = "Farenheit: " + fiveDayWeatherData.list[6].main.temp;
@@ -197,7 +203,7 @@ $.ajax({
   document.getElementById("day-four-humidity").innerText = dayFourHumidity;
 
   // Day 5
-  const dayFiveDate = moment().add(3, 'days').calendar();;
+  const dayFiveDate = moment().add(5, 'days').format('dddd');
   document.getElementById("day-five-date").innerText = dayFiveDate;
 
   const dayFiveTemp = "Farenheit: " + fiveDayWeatherData.list[7].main.temp;
@@ -213,17 +219,17 @@ $.ajax({
 
 
 };
-      
-
-    
-    
 
 $("#search-button").on("click", function(event) {
     // This line allows us to take advantage of the HTML "submit" property
     // This way we can hit enter on the keyboard and it registers the search
     // (in addition to clicks). Prevents the page from reloading on form submit.
     event.preventDefault();
-  
+    const searchInput = $("#search-input")
+      .val()
+      .trim();
+    
+  history.push(searchInput)
     // Empty the region associated with the articles
     // clear();
   
@@ -236,8 +242,21 @@ $("#search-button").on("click", function(event) {
       url: queryURL,
       method: "GET"
     }).then(updatePage)
-  });
+
+    
+
   
+
+  // });
+  // const currentWeatherStorage =  {
+  //   city:
+  // Description:
+  // Temperature:
+  // TempFeelsLike
+  // Humidity:
+  // Wind: 
+renderHistoryButtons();
+  });
 // function displayCurrentWeather(current) {
 //   document.getElementById("city-name")
 //   const cityName = current.main.name;
@@ -245,6 +264,27 @@ $("#search-button").on("click", function(event) {
 //   current.main.name.innerHTML = cityName
 
 // }
+function renderHistoryButtons() {
 
+  // Deleting the movies prior to adding new movies
+  // (this is necessary otherwise you will have repeat buttons)
+  $("#buttons-view").empty();
+
+  // Looping through the array of movies
+  for (let i = 0; i < history.length; i++) {
+
+    // Then dynamicaly generating buttons for each movie in the array
+    // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
+    let a = $("<button>");
+    // Adding a class of movie-btn to our button
+    a.addClass("history-btn");
+    // Adding a data-attribute
+    a.attr("data-name", history[i]);
+    // Providing the initial button text
+    a.text(history[i]);
+    // Adding the button to the buttons-view div
+    $("#buttons-view").append(a);
+  }
+}
 
 searchQuery();
