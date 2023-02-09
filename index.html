@@ -34,15 +34,16 @@
                 aria-labelledby="form-heading" aria-controls="today forecast" />
               <div class="input-group-append">
                 <!--button class="btn btn-primary"-->
-                <button type="submit" class="btn search-button" id="search-button" aria-label="submit search">
-                  Search
-                </button>
+                <input type="submit" class="btn search-button" id="search-button" aria-label="submit search">
+              </input>
                 <hr class="hr weather-hr" />
               </div>
             </div>
           </div>
         </form>
-        <div class="list-group" id="search-history"></div>
+        <div class="list-group" id="search-history"> Search history
+          <div id="buttons-view"></div>
+        </div>
       </aside>
 
       <div class="col-lg-9 pb-3">
@@ -71,50 +72,6 @@
           <div id="five-day-forecast">
             <h2 class="h3 text-center">5-Day Forecast</h2>
             <div id="forecast-cards" class="d-flex justify-content-around flex-wrap">
-
-
-              <!-- <div id="forecast-section" class="card">
-                <div id="tomorrow-date" class="card-header">
-                </div>
-                <ul id="forecast-list" class="list-group list-group-flush">
-                  
-                <li id="tomorrow-temp"></li>
-                <li id="tomorrow-wind"></li>
-                <li id="tomorrow-humidity"></li>
-                </ul>
-              </div>
-
-             
-              <div class="card">
-                <div id="day-two-date" class="card-header">
-                </div>
-                <ul id="forecast-list" class="list-group list-group-flush">
-                <li id="day-two-temp"></li>
-                <li id="day-two-wind"></li>
-                <li id="day-two-humidity"></li>
-                </ul>
-                
-                
-              <div class="card">
-                <div id="day-three-date" class="card-header">
-                </div>
-                <ul id="forecast-list" class="list-group list-group-flush">
-                <li id="day-three-temp"></li>
-                <li id="day-three-wind"></li>
-                <li id="day-three-humidity"></li>
-                </ul>
-                
-
-                  
-              <div class="card">
-                <div id="day-three-date" class="card-header">
-                </div>
-                <ul id="forecast-list" class="list-group list-group-flush">
-                <li id="day-three-temp"></li>
-                <li id="day-three-wind"></li>
-                <li id="day-three-humidity"></li>
-                </ul>
-              </div> -->
             
               <div class="container">
                 <div class="row">
@@ -188,3 +145,4 @@
   <script src="assets/script.js"></script>
 </body>
 </html>
+
