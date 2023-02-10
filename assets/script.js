@@ -235,7 +235,7 @@ $("#search-button").on("click", function(event) {
     
   history.push(searchInput)
   
-    var queryURL = searchQuery();
+    let queryURL = searchQuery();
   
     $.ajax({
       url: queryURL,
@@ -243,7 +243,8 @@ $("#search-button").on("click", function(event) {
     }).then((data) => updatePage(data))
 
     
-
+  
+   
   
 
   // });
@@ -304,15 +305,16 @@ $(document).on("click", ".history-btn", function(event) {
   const searchInput = $(event.target.getAttribute("data-name"))
   
   
-// history.push(searchInput)
+  let queryURL
 
-  var queryURL = searchQuery();
+ queryURL = queryURL + searchInput + urlApiKey;
+
 
   $.ajax({
     url: queryURL,
     method: "GET"
   }).then((data) => {
-    $(updatePage(locationData))
+    $(updatePage(data))
   })
 
 });
