@@ -205,6 +205,8 @@ $("#search-button").on("click", function (event) {
   }).then((data) => updatePage(data));
 
   renderHistoryButtons();
+
+  localStorage.setItem("Search-history", searchInput);
 });
 
 function renderHistoryButtons() {
@@ -254,5 +256,7 @@ $(document).on("click", ".history-btn", function (event) {
     $(updatePage(data));
   });
 });
+
+
 
 searchQuery();
