@@ -61,8 +61,8 @@ function updatePage(locationData) {
     // console.log(locationData);
     // console.log(searchHistory);
 
-    for (let i = 0; i < locationData.response; i++) {
-        const weatherLocation = locationData.response[i];
+    for (let i = 0; i < locationData; i++) {
+        const weatherLocation = locationData[i];
         
         const historyButton = $("<button>").text(`${historyCount}. ${weatherLocation}`);
 
@@ -287,8 +287,14 @@ function renderHistoryButtons() {
   }
 }
 
+function appendToHistory() {
+  history.push("history-btn");
+  
+  renderHistoryButtons();
+}
 
 
 $(document).on("click", ".history-btn", searchQuery);
 
 searchQuery();
+
