@@ -302,10 +302,10 @@ $(document).on("click", ".history-btn", function(event) {
   // (in addition to clicks). Prevents the page from reloading on form submit.
   event.preventDefault();
   console.log(event.target.getAttribute("data-name"))
-  const searchInput = $(event.target.getAttribute("data-name"))
-  
-  
-  let queryURL
+  // const searchInput = $(event.target.getAttribute("data-name"))
+  const searchInput = event.target.getAttribute("data-name")  
+
+let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q="
 
  queryURL = queryURL + searchInput + urlApiKey;
 
