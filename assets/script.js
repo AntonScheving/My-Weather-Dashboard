@@ -13,10 +13,15 @@
 const history = [];
 
 
-function searchQuery(weatherLocationData) {
+function searchQuery(cityName = null) {
     // queryURL is the url we'll use to query the API
     let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=";
   
+    let searchInputValue = $("#search-input").val().trim();
+    if (cityName) {
+        searchInputValue = cityName;
+    }
+
     // Begin building an object to contain our API call's query parameters
     // Set the API key
     const searchInput = $("#search-input")
@@ -47,16 +52,6 @@ function locationData() {
     console.log(newQueryURL)
     return newQueryURL;
 }
-// // console.log("input")
-// function searchHistory(weatherData) {
-//     const weatherLocation = weatherData.response[i];
-//     const searchHistory = $("#search-history").val();
-// for (let i = 0; i < weatherData.response; ) {
-
-// const historyButton = $("<button>").text(weatherLocation);
-// searchHistory.appendChild(button)
-
-// }};
 
 historyCount = 0;
 
@@ -81,7 +76,16 @@ function updatePage(locationData) {
         // historyList.append(historyButton);
         historyList.append(historyButton);
         // historyButton.append(historyList);
+        searchHistory.append(historyList);
+
+        historyButton.on("click", function(){
+      const cityName = $(this).data("name");
+      searchInput.val(cityName);
+      searchQuery();
+    });
     }    
+
+    
     
     locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?lat="
 
@@ -230,14 +234,9 @@ $("#search-button").on("click", function(event) {
       .trim();
     
   history.push(searchInput)
-    // Empty the region associated with the articles
-    // clear();
   
-    // Build the query URL for the ajax request to the NYT API
     var queryURL = searchQuery();
   
-    // Make the AJAX request to the API - GETs the JSON data at the queryURL.
-    // The data then gets passed as an argument to the updatePage function
     $.ajax({
       url: queryURL,
       method: "GET"
@@ -256,6 +255,7 @@ $("#search-button").on("click", function(event) {
   // Humidity:
   // Wind: 
 renderHistoryButtons();
+updatePage();
   });
 // function displayCurrentWeather(current) {
 //   document.getElementById("city-name")
@@ -266,25 +266,29 @@ renderHistoryButtons();
 // }
 function renderHistoryButtons() {
 
-  // Deleting the movies prior to adding new movies
+  // Deleting the search history prior to adding new search buttons
   // (this is necessary otherwise you will have repeat buttons)
-  $("#buttons-view").empty();
+  $("#search-history").empty();
 
-  // Looping through the array of movies
+  // Looping through the array of history
   for (let i = 0; i < history.length; i++) {
 
-    // Then dynamicaly generating buttons for each movie in the array
+    // Then dynamicaly generating buttons for each search made in the array
     // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
     let a = $("<button>");
-    // Adding a class of movie-btn to our button
+    // Adding a class of history-btn to the button
     a.addClass("history-btn");
     // Adding a data-attribute
     a.attr("data-name", history[i]);
     // Providing the initial button text
     a.text(history[i]);
-    // Adding the button to the buttons-view div
-    $("#buttons-view").append(a);
+    // Adding the button to the #search-history div
+    $("#search-history").append(a);
   }
 }
+
+
+
+$(document).on("click", ".history-btn", searchQuery);
 
 searchQuery();
