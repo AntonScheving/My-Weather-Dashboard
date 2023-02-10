@@ -240,7 +240,7 @@ $("#search-button").on("click", function(event) {
     $.ajax({
       url: queryURL,
       method: "GET"
-    }).then(updatePage)
+    }).then((data) => updatePage(data))
 
     
 
@@ -255,7 +255,7 @@ $("#search-button").on("click", function(event) {
   // Humidity:
   // Wind: 
 renderHistoryButtons();
-updatePage();
+// updatePage();
   });
 // function displayCurrentWeather(current) {
 //   document.getElementById("city-name")
@@ -285,6 +285,7 @@ function renderHistoryButtons() {
     // Adding the button to the #search-history div
     $("#search-history").append(a);
   }
+  
 }
 
 function appendToHistory() {
