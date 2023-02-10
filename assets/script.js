@@ -295,7 +295,27 @@ function appendToHistory() {
 }
 
 
-$(document).on("click", ".history-btn", searchQuery);
+$(document).on("click", ".history-btn", function(event) {
+  // This line allows us to take advantage of the HTML "submit" property
+  // This way we can hit enter on the keyboard and it registers the search
+  // (in addition to clicks). Prevents the page from reloading on form submit.
+  event.preventDefault();
+  console.log(event.target.getAttribute("data-name"))
+  const searchInput = $(event.target.getAttribute("data-name"))
+  
+  
+// history.push(searchInput)
+
+  var queryURL = searchQuery();
+
+  $.ajax({
+    url: queryURL,
+    method: "GET"
+  }).then((data) => {
+    $(updatePage(locationData))
+  })
+
+});
 
 searchQuery();
 
