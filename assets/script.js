@@ -42,6 +42,8 @@ function locationData() {
 }
 
 historyCount = 0;
+// Load history from local storage
+let storedHistory = JSON.parse(localStorage.getItem("history")) || [];
 
 function updatePage(locationData) {
   const searchHistory = $("#search-history");
@@ -49,8 +51,21 @@ function updatePage(locationData) {
   // console.log(locationData);
   // console.log(searchHistory);
 
-  for (let i = 0; i < locationData; i++) {
-    const weatherLocation = locationData[i];
+  // for (let i = 0; i < locationData; i++) {
+  //   const weatherLocation = locationData[i];
+
+
+// Add the current weather location to the stored history
+storedHistory.push(locationData);
+
+// Save the updated history to local storage
+localStorage.setItem("history", JSON.stringify(storedHistory));
+
+
+
+// Loop through the stored history and render the buttons
+for (let i = 0; i < storedHistory.length; i++) {
+  const weatherLocation = storedHistory[i];
 
     const historyButton = $("<button>").text(
       `${historyCount}. ${weatherLocation}`
@@ -193,7 +208,7 @@ $("#search-button").on("click", function (event) {
   // This way we can hit enter on the keyboard and it registers the search
   // (in addition to clicks). Prevents the page from reloading on form submit.
   event.preventDefault();
-  const searchInput = $("#search-input").val().trim();
+  let searchInput = $("#search-input").val().trim();
 
   history.push(searchInput);
 
@@ -206,7 +221,28 @@ $("#search-button").on("click", function (event) {
 
   renderHistoryButtons();
 
-  localStorage.setItem("Search-history", searchInput);
+
+// Function to store values in local storage
+function storeValues(searchInput) {
+  // Get the current values stored in local storage
+  let values = JSON.parse(localStorage.getItem("values")) || [];
+  
+  // Add the new value to the values array
+  values.push(searchInput);
+  
+  // Keep only the last 6 values
+  if (values.length > 6) {
+    values = values.slice(values.length - 6);
+  }
+  
+  // Store the updated values in local storage
+  localStorage.setItem("values", JSON.stringify(values));
+}
+
+searchInput = $("#search-input").val().trim();
+storeValues(searchInput);
+
+
 });
 
 function renderHistoryButtons() {
@@ -227,14 +263,39 @@ function renderHistoryButtons() {
     a.text(history[i]);
     // Adding the button to the #search-history div
     $("#search-history").append(a);
+    // $("#search-history").append(localStorage.getItem("values"));
+    if (history.length > 6) {
+    let values = history.slice(values.length - 6);
+  }  
+  return JSON.parse(localStorage.getItem("values")) || [];
+
   }
-}
+  
 
-function appendToHistory() {
-  history.push("history-btn");
-
-  renderHistoryButtons();
 }
+// Function to retrieve the saved buttons from local storage
+// function renderInput() {
+//   for (let i = 9; i < 18; i++) {
+//     let textInput = localStorage.getItem("hour-" + i);
+
+//     if (!textInput) {
+//       continue;
+//     }
+
+//     $(".time-block")
+//       .eq(i - 9)
+//       .children("input")
+//       .val(textInput);
+//   }
+
+
+// }
+
+// function appendToHistory() {
+//   history.push("history-btn");
+
+//   renderHistoryButtons();
+// }
 
 $(document).on("click", ".history-btn", function (event) {
   // This line allows us to take advantage of the HTML "submit" property
@@ -260,3 +321,47 @@ $(document).on("click", ".history-btn", function (event) {
 
 
 searchQuery();
+
+// const historyLocalStorage = [];
+
+// // Function to save the buttons to local storage
+// function saveHistoryButtons() {
+//   localStorage.setItem("historyButtons", JSON.stringify(historyLocalStorage));
+// }
+
+// // Function to retrieve the saved buttons from local storage
+// function getHistoryButtons() {
+//   return JSON.parse(localStorage.getItem("historyButtons")) || [];
+// }
+
+// // // Function to render the history buttons
+// // function renderHistoryButtons() {
+// //   const searchHistory = $("#search-history");
+// //   searchHistory.empty();
+
+// //   const buttons = getHistoryButtons();
+// //   for (let i = 0; i < buttons.length; i++) {
+// //     const weatherLocation = buttons[i];
+// //     const historyButton = $("<button>").text(weatherLocation);
+// //     historyButton.on("click", function () {});
+// //     const historyList = $("<ul>");
+// //     historyList.append(historyButton);
+// //     searchHistory.append(historyList);
+// //     historyButton.on("click", function () {
+// //       const cityName = $(this).data("name");
+// //       searchInput.val(cityName);
+// //       searchQuery();
+// //     });
+// //   }
+// // }
+
+// // Function to add a button to the history
+// function addHistoryButton(location) {
+//   history.push(location);
+//   saveHistoryButtons();
+//   renderHistoryButtons();
+// }
+
+// // Call the renderHistoryButtons function to retrieve the saved buttons
+// renderHistoryButtons();
+

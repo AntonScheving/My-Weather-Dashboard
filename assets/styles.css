@@ -1,0 +1,31 @@
+:root {
+    /* declare a variable with `--` syntax */
+    --gradient-white-blue: linear-gradient(90deg, rgb(251, 251, 253), rgb(50, 53, 235));
+    --gradient-white-blue: linear-gradient(90deg, rgb(251, 251, 253), rgb(190, 191, 244));
+    --gradient-blue-white: linear-gradient(90deg, rgb(190, 191, 244), rgb( 251, 251, 253));
+}
+
+.header {
+    /* 
+    height determines the position of the "Aboutme section on the vertical axis on the page" 
+    */
+    height: 115px;
+     /* padding-top makes the navigation banner move down */
+    padding-top: 15px;
+    /* Because the "var(--gradient-purple-black)" is a gradient is has to be "-image" */
+    background-image: var(--gradient-white-blue);
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+.aside {
+    background-image: var(--gradient-white-blue);
+}
+
+.main-section {
+    background-image: var(--gradient-blue-white);
+}
+
+h1, h2, text {
+    color: rgb(28, 28, 215);
+}
+
