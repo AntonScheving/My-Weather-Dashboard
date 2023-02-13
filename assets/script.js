@@ -1,7 +1,7 @@
 // to catch an error
 // .catch(err => console.error(err));
 
-const history = [];
+var history = [];
 
 function searchQuery(cityName = null) {
   // queryURL is the url we'll use to query the API
@@ -54,36 +54,11 @@ function updatePage(locationData) {
   // for (let i = 0; i < locationData; i++) {
   //   const weatherLocation = locationData[i];
 
+  // Add the current weather location to the stored history
 
-// Add the current weather location to the stored history
-storedHistory.push(locationData);
+  // Save the updated history to local storage
 
-// Save the updated history to local storage
-localStorage.setItem("history", JSON.stringify(storedHistory));
-
-
-
-// Loop through the stored history and render the buttons
-for (let i = 0; i < storedHistory.length; i++) {
-  const weatherLocation = storedHistory[i];
-
-    const historyButton = $("<button>").text(
-      `${historyCount}. ${weatherLocation}`
-    );
-
-    historyButton.on("click", function () {});
-    const historyList = $("<ul>");
-
-    historyList.append(historyButton);
-
-    searchHistory.append(historyList);
-
-    historyButton.on("click", function () {
-      const cityName = $(this).data("name");
-      searchInput.val(cityName);
-      searchQuery();
-    });
-  }
+  // Loop through the stored history and render the buttons
 
   locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?lat=";
 
@@ -210,7 +185,7 @@ $("#search-button").on("click", function (event) {
   event.preventDefault();
   let searchInput = $("#search-input").val().trim();
 
-  history.push(searchInput);
+  // history.push(searchInput);
 
   let queryURL = searchQuery();
 
@@ -219,60 +194,56 @@ $("#search-button").on("click", function (event) {
     method: "GET",
   }).then((data) => updatePage(data));
 
-  renderHistoryButtons();
+ 
 
+  // Function to store values in local storage
+  function storeValues(searchInput) {
+    // Get the current values stored in local storage
+    let values = JSON.parse(localStorage.getItem("values")) || [];
 
-// Function to store values in local storage
-function storeValues(searchInput) {
-  // Get the current values stored in local storage
-  let values = JSON.parse(localStorage.getItem("values")) || [];
-  
-  // Add the new value to the values array
-  values.push(searchInput);
-  
-  // Keep only the last 6 values
-  if (values.length > 6) {
-    values = values.slice(values.length - 6);
+    // Add the new value to the values array
+    values.push(searchInput);
+
+    // Keep only the last 6 values
+    if (values.length > 6) {
+      values = values.slice(values.length - 6);
+    }
+
+    // Store the updated values in local storage
+    localStorage.setItem("values", JSON.stringify(values));
   }
+
+  searchInput = $("#search-input").val().trim();
+  storeValues(searchInput); 
   
-  // Store the updated values in local storage
-  localStorage.setItem("values", JSON.stringify(values));
-}
-
-searchInput = $("#search-input").val().trim();
-storeValues(searchInput);
-
-
+  renderHistoryButtons();
 });
 
 function renderHistoryButtons() {
   // Deleting the search history prior to adding new search buttons
   // (this is necessary otherwise you will have repeat buttons)
   $("#search-history").empty();
+  let values = JSON.parse(localStorage.getItem("values")) || [];
 
   // Looping through the array of history
-  for (let i = 0; i < history.length; i++) {
+  for (let i = 0; i < values.length; i++) {
     // Then dynamicaly generating buttons for each search made in the array
     // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
     let a = $("<button>");
     // Adding a class of history-btn to the button
     a.addClass("history-btn");
     // Adding a data-attribute
-    a.attr("data-name", history[i]);
+    a.attr("data-name", values[i]);
     // Providing the initial button text
-    a.text(history[i]);
+    a.text(values[i]);
     // Adding the button to the #search-history div
     $("#search-history").append(a);
     // $("#search-history").append(localStorage.getItem("values"));
-    if (history.length > 6) {
-    let values = history.slice(values.length - 6);
-  }  
-  return JSON.parse(localStorage.getItem("values")) || [];
-
+    
   }
-  
-
 }
+renderHistoryButtons()
+
 // Function to retrieve the saved buttons from local storage
 // function renderInput() {
 //   for (let i = 9; i < 18; i++) {
@@ -287,7 +258,6 @@ function renderHistoryButtons() {
 //       .children("input")
 //       .val(textInput);
 //   }
-
 
 // }
 
@@ -317,8 +287,6 @@ $(document).on("click", ".history-btn", function (event) {
     $(updatePage(data));
   });
 });
-
-
 
 searchQuery();
 
@@ -364,4 +332,3 @@ searchQuery();
 
 // // Call the renderHistoryButtons function to retrieve the saved buttons
 // renderHistoryButtons();
-
