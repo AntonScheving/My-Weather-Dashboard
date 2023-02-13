@@ -16,9 +16,12 @@ function searchQuery(cityName = null) {
   // Set the API key
   const searchInput = $("#search-input").val().trim();
 
-  let urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
+  const urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
+
+  // const metricTemp = "&units=metric"
 
   queryURL = queryURL + searchInput + urlApiKey;
+
 
   console.log(queryURL);
 
@@ -35,7 +38,9 @@ function locationData() {
   const urlApiKey =
     "&appid=" + "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
 
-  newQueryURL = locationQueryURL + latitude + longitude + urlApiKey;
+    
+
+  newQueryURL = locationQueryURL + latitude + longitude + urlApiKey + metricTemp;
 
   console.log(newQueryURL);
   return newQueryURL;
@@ -68,7 +73,9 @@ function updatePage(locationData) {
 
   urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
 
-  const newQueryURL = locationQueryURL + latitude + longitude + urlApiKey;
+  const metricTemp = "&units=metric";
+
+  const newQueryURL = locationQueryURL + latitude + longitude + urlApiKey + metricTemp;
 
   console.log(newQueryURL);
 
@@ -77,7 +84,9 @@ function updatePage(locationData) {
 
   const fiveDayApiKey = "&appid=af6cd0de4ed902410e31681b511a1063";
 
-  const fiveDayData = fiveDayQuery + latitude + longitude + fiveDayApiKey;
+
+
+  const fiveDayData = fiveDayQuery + latitude + longitude + fiveDayApiKey + metricTemp;
 
   console.log(fiveDayData);
 
@@ -88,9 +97,9 @@ function updatePage(locationData) {
     const cityName = weatherData.name + moment().format(" - Do MMMM YYYY");
 
     const weatherDescription = weatherData.weather[0].description;
-    const tempFarenheit = "Farenheit: " + weatherData.main.temp;
-    const tempFeelsFarenheit = "Feels like: " + weatherData.main.feels_like;
-    const wind = "Wind speed: " + weatherData.wind.speed;
+    const tempFarenheit = "Celcius: " + Math.round(weatherData.main.temp);
+    const tempFeelsFarenheit = "Feels like: " + Math.round(weatherData.main.feels_like);
+    const wind = "Wind speed: " + Math.round(weatherData.wind.speed);
     const humidity = "Humidity: " + weatherData.main.humidity + "%";
     document.getElementById("city-name").innerText = cityName;
     // document.getElementById("weather-icon").innerHTML = icon;
@@ -110,70 +119,70 @@ function updatePage(locationData) {
     tomorrowDate = moment().add(1, "days").format("dddd");
     document.getElementById("tomorrow-date").innerText = tomorrowDate;
 
-    const tomorrowTemp = "Farenheit: " + fiveDayWeatherData.list[3].main.temp;
+    const tomorrowTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[3].main.temp);
     document.getElementById("tomorrow-temp").innerText = tomorrowTemp;
 
-    const tomorrowWind = "Wind: " + fiveDayWeatherData.list[3].wind.speed;
+    const tomorrowWind = "Wind: " + Math.round(fiveDayWeatherData.list[3].wind.speed);
     document.getElementById("tomorrow-wind").innerText = tomorrowWind;
 
     const tomorrowHumidity =
-      "Humidity: " + fiveDayWeatherData.list[3].main.humidity + "%";
+      "Humidity: " + Math.round(fiveDayWeatherData.list[3].main.humidity) + "%";
     document.getElementById("tomorrow-humidity").innerText = tomorrowHumidity;
 
     // Day 2
     dayTwoDate = moment().add(2, "days").format("dddd");
     document.getElementById("day-two-date").innerText = dayTwoDate;
 
-    const dayTwoTemp = "Farenheit: " + fiveDayWeatherData.list[4].main.temp;
+    const dayTwoTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[4].main.temp);
     document.getElementById("day-two-temp").innerText = dayTwoTemp;
 
-    const dayTwoWind = "Wind: " + fiveDayWeatherData.list[4].wind.speed;
+    const dayTwoWind = "Wind: " + Math.round(fiveDayWeatherData.list[4].wind.speed);
     document.getElementById("day-two-wind").innerText = dayTwoWind;
 
     const dayTwoHumidity =
-      "Humidity: " + fiveDayWeatherData.list[4].main.humidity + "%";
+      "Humidity: " + Math.round(fiveDayWeatherData.list[4].main.humidity) + "%";
     document.getElementById("day-two-humidity").innerText = dayTwoHumidity;
 
     // Day 3
     const dayThreeDate = moment().add(3, "days").format("dddd");
     document.getElementById("day-three-date").innerText = dayThreeDate;
 
-    const dayThreeTemp = "Farenheit: " + fiveDayWeatherData.list[5].main.temp;
+    const dayThreeTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[5].main.temp);
     document.getElementById("day-three-temp").innerText = dayThreeTemp;
 
-    const dayThreeWind = "Wind: " + fiveDayWeatherData.list[5].wind.speed;
+    const dayThreeWind = "Wind: " + Math.round(fiveDayWeatherData.list[5].wind.speed);
     document.getElementById("day-three-wind").innerText = dayThreeWind;
 
     const dayThreeHumidity =
-      "Humidity: " + fiveDayWeatherData.list[5].main.humidity + "%";
+      "Humidity: " + Math.round(fiveDayWeatherData.list[5].main.humidity) + "%";
     document.getElementById("day-three-humidity").innerText = dayThreeHumidity;
 
     // Day 4
     const dayFourDate = moment().add(4, "days").format("dddd");
     document.getElementById("day-four-date").innerText = dayFourDate;
 
-    const dayFourTemp = "Farenheit: " + fiveDayWeatherData.list[6].main.temp;
+    const dayFourTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[6].main.temp);
     document.getElementById("day-four-temp").innerText = dayFourTemp;
 
-    const dayFourWind = "Wind: " + fiveDayWeatherData.list[6].wind.speed;
+    const dayFourWind = "Wind: " + Math.round(fiveDayWeatherData.list[6].wind.speed);
     document.getElementById("day-four-wind").innerText = dayFourWind;
 
     const dayFourHumidity =
-      "Humidity: " + fiveDayWeatherData.list[6].main.humidity + "%";
+      "Humidity: " + Math.round(fiveDayWeatherData.list[6].main.humidity) + "%";
     document.getElementById("day-four-humidity").innerText = dayFourHumidity;
 
     // Day 5
     const dayFiveDate = moment().add(5, "days").format("dddd");
     document.getElementById("day-five-date").innerText = dayFiveDate;
 
-    const dayFiveTemp = "Farenheit: " + fiveDayWeatherData.list[7].main.temp;
+    const dayFiveTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[7].main.temp);
     document.getElementById("day-five-temp").innerText = dayFiveTemp;
 
-    const dayFiveWind = "Wind: " + fiveDayWeatherData.list[7].wind.speed;
+    const dayFiveWind = "Wind: " + Math.round(fiveDayWeatherData.list[7].wind.speed);
     document.getElementById("day-five-wind").innerText = dayFiveWind;
 
     const dayFiveHumidity =
-      "Humidity: " + fiveDayWeatherData.list[7].main.humidity + "%";
+      "Humidity: " + Math.round(fiveDayWeatherData.list[7].main.humidity) + "%";
     document.getElementById("day-five-humidity").innerText = dayFiveHumidity;
   });
 }
@@ -237,7 +246,7 @@ function renderHistoryButtons() {
     // Providing the initial button text
     a.text(values[i]);
     // Adding the button to the #search-history div
-    $("#search-history").append(a);
+    $("#search-history").prepend(a);
     // $("#search-history").append(localStorage.getItem("values"));
     
   }
@@ -277,6 +286,9 @@ $(document).on("click", ".history-btn", function (event) {
   const searchInput = event.target.getAttribute("data-name");
 
   let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=";
+
+  const urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
+
 
   queryURL = queryURL + searchInput + urlApiKey;
 
