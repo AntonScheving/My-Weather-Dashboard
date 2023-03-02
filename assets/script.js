@@ -93,15 +93,15 @@ function updatePage(locationData) {
     const cityName = weatherData.name + moment().format(" - Do MMMM YYYY");
     const icon = weatherData.weather[0].icon
     const weatherDescription = weatherData.weather[0].description;
-    const tempCelsius = "Celcius: " + Math.round(weatherData.list[0].main.temp);
+    const tempCelsius = "Celcius: " + Math.round(weatherData.main.temp);
     const tempFeelsCelsius = "Feels like: " + Math.round(weatherData.main.feels_like);
     const wind = "Wind speed: " + Math.round(weatherData.wind.speed);
     const humidity = "Humidity: " + weatherData.main.humidity + "%";
     document.getElementById("city-name").innerText = cityName;
     document.getElementById("weather-icon").innerHTML = icon;
     document.getElementById("weather-text").innerHTML = weatherDescription;
-    document.getElementById("temperature-celcius").innerText = tempCelsius;
-    document.getElementById("temperature-feels-farenheit").innerText =
+    document.getElementById("temperature-celsius").innerText = tempCelsius;
+    document.getElementById("temperature-feels-celsius").innerText =
     tempFeelsCelsius;
     document.getElementById("wind-speed").innerText = wind;
     document.getElementById("humidity").innerText = humidity;
