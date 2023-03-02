@@ -7,7 +7,6 @@ function searchQuery(cityName = null) {
   // queryURL is the url we'll use to query the API
   let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=";
 
-  let searchInputValue = $("#search-input").val().trim();
   if (cityName) {
     searchInputValue = cityName;
   }
@@ -51,8 +50,6 @@ historyCount = 0;
 let storedHistory = JSON.parse(localStorage.getItem("history")) || [];
 
 function updatePage(locationData) {
-  const searchHistory = $("#search-history");
-
   // console.log(locationData);
   // console.log(searchHistory);
 
@@ -85,7 +82,6 @@ function updatePage(locationData) {
   const fiveDayApiKey = "&appid=af6cd0de4ed902410e31681b511a1063";
 
 
-
   const fiveDayData = fiveDayQuery + latitude + longitude + fiveDayApiKey + metricTemp;
 
   console.log(fiveDayData);
@@ -95,18 +91,18 @@ function updatePage(locationData) {
     method: "GET",
   }).then(function (weatherData) {
     const cityName = weatherData.name + moment().format(" - Do MMMM YYYY");
-
+    const icon = weatherData.weather[0].icon
     const weatherDescription = weatherData.weather[0].description;
-    const tempFarenheit = "Celcius: " + Math.round(weatherData.main.temp);
-    const tempFeelsFarenheit = "Feels like: " + Math.round(weatherData.main.feels_like);
+    const tempCelsius = "Celcius: " + Math.round(weatherData.list[0].main.temp);
+    const tempFeelsCelsius = "Feels like: " + Math.round(weatherData.main.feels_like);
     const wind = "Wind speed: " + Math.round(weatherData.wind.speed);
     const humidity = "Humidity: " + weatherData.main.humidity + "%";
     document.getElementById("city-name").innerText = cityName;
-    // document.getElementById("weather-icon").innerHTML = icon;
+    document.getElementById("weather-icon").innerHTML = icon;
     document.getElementById("weather-text").innerHTML = weatherDescription;
-    document.getElementById("temperature-farenheit").innerText = tempFarenheit;
+    document.getElementById("temperature-celcius").innerText = tempCelsius;
     document.getElementById("temperature-feels-farenheit").innerText =
-      tempFeelsFarenheit;
+    tempFeelsCelsius;
     document.getElementById("wind-speed").innerText = wind;
     document.getElementById("humidity").innerText = humidity;
   });
@@ -116,18 +112,18 @@ function updatePage(locationData) {
     method: "GET",
   }).then(function (fiveDayWeatherData) {
     // Day 1 (tomorrow)
-    tomorrowDate = moment().add(1, "days").format("dddd");
-    document.getElementById("tomorrow-date").innerText = tomorrowDate;
+    dayOneDate = moment().add(1, "days").format("dddd");
+    document.getElementById("day-one-date").innerText = dayOneDate;
 
-    const tomorrowTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[3].main.temp);
-    document.getElementById("tomorrow-temp").innerText = tomorrowTemp;
+    const dayOneTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[3].main.temp);
+    document.getElementById("day-one-temp").innerText = dayOneTemp;
 
-    const tomorrowWind = "Wind: " + Math.round(fiveDayWeatherData.list[3].wind.speed);
-    document.getElementById("tomorrow-wind").innerText = tomorrowWind;
+    const dayOneWind = "Wind: " + Math.round(fiveDayWeatherData.list[3].wind.speed);
+    document.getElementById("day-one-wind").innerText = dayOneWind;
 
-    const tomorrowHumidity =
+    const dayOneHumidity =
       "Humidity: " + Math.round(fiveDayWeatherData.list[3].main.humidity) + "%";
-    document.getElementById("tomorrow-humidity").innerText = tomorrowHumidity;
+    document.getElementById("day-one-humidity").innerText = dayOneHumidity;
 
     // Day 2
     dayTwoDate = moment().add(2, "days").format("dddd");
@@ -244,6 +240,7 @@ function renderHistoryButtons() {
     // Adding a data-attribute
     a.attr("data-name", values[i]);
     // Providing the initial button text
+    
     a.text(values[i]);
     // Adding the button to the #search-history div
     $("#search-history").prepend(a);
