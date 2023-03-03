@@ -98,7 +98,8 @@ function updatePage(locationData) {
     const wind = "Wind speed: " + Math.round(weatherData.wind.speed);
     const humidity = "Humidity: " + weatherData.main.humidity + "%";
     document.getElementById("city-name").innerText = cityName;
-    document.getElementById("weather-icon").innerHTML = icon;
+    // document.getElementById("weather-icon").innerHTML = icon;
+    document.getElementById("weather-icon").innerHTML = '<img src=http://openweathermap.org/img/wn/' + icon + '@2x.png>';
     document.getElementById("weather-text").innerHTML = weatherDescription;
     document.getElementById("temperature-celsius").innerText = tempCelsius;
     document.getElementById("temperature-feels-celsius").innerText =
@@ -115,6 +116,9 @@ function updatePage(locationData) {
     dayOneDate = moment().add(1, "days").format("dddd");
     document.getElementById("day-one-date").innerText = dayOneDate;
 
+    const dayOneIcon = fiveDayWeatherData.list[3].weather[0].icon
+    document.getElementById("day-one-icon").innerHTML = '<img src=http://openweathermap.org/img/wn/' + dayOneIcon + '.png>';
+
     const dayOneTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[3].main.temp);
     document.getElementById("day-one-temp").innerText = dayOneTemp;
 
@@ -128,6 +132,9 @@ function updatePage(locationData) {
     // Day 2
     dayTwoDate = moment().add(2, "days").format("dddd");
     document.getElementById("day-two-date").innerText = dayTwoDate;
+
+    const dayTwoIcon = fiveDayWeatherData.list[4].weather[0].icon
+    document.getElementById("day-two-icon").innerHTML = '<img src=http://openweathermap.org/img/wn/' + dayTwoIcon + '.png>';
 
     const dayTwoTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[4].main.temp);
     document.getElementById("day-two-temp").innerText = dayTwoTemp;
@@ -143,6 +150,9 @@ function updatePage(locationData) {
     const dayThreeDate = moment().add(3, "days").format("dddd");
     document.getElementById("day-three-date").innerText = dayThreeDate;
 
+    const dayThreeIcon = fiveDayWeatherData.list[5].weather[0].icon
+    document.getElementById("day-three-icon").innerHTML = '<img src=http://openweathermap.org/img/wn/' + dayThreeIcon + '.png>';
+
     const dayThreeTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[5].main.temp);
     document.getElementById("day-three-temp").innerText = dayThreeTemp;
 
@@ -157,6 +167,9 @@ function updatePage(locationData) {
     const dayFourDate = moment().add(4, "days").format("dddd");
     document.getElementById("day-four-date").innerText = dayFourDate;
 
+    const dayFourIcon = fiveDayWeatherData.list[6].weather[0].icon
+    document.getElementById("day-four-icon").innerHTML = '<img src=http://openweathermap.org/img/wn/' + dayFourIcon + '.png>';
+
     const dayFourTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[6].main.temp);
     document.getElementById("day-four-temp").innerText = dayFourTemp;
 
@@ -170,6 +183,9 @@ function updatePage(locationData) {
     // Day 5
     const dayFiveDate = moment().add(5, "days").format("dddd");
     document.getElementById("day-five-date").innerText = dayFiveDate;
+
+    const dayFiveIcon = fiveDayWeatherData.list[7].weather[0].icon
+    document.getElementById("day-five-icon").innerHTML = '<img src=http://openweathermap.org/img/wn/' + dayFiveIcon + '.png>';
 
     const dayFiveTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[7].main.temp);
     document.getElementById("day-five-temp").innerText = dayFiveTemp;
