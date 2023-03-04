@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html lang="en-gb">
 
@@ -9,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-   <link rel="stylesheet" href="assets/styles.css" />
+  <link rel="stylesheet" href="assets/styles.css" />
   <title>My Weather Dashboard</title>
 </head>
 
@@ -28,21 +26,20 @@
         <form id="search-form" class="form">
           <div class="form-inline form-group">
             <div class="input-group">
-               <!--input class="form-control"--> 
-              <input class="form-input weather-search" 
-              type="text" id="search-input" placeholder="Enter a city name"
+              <!--input class="form-control"-->
+              <input class="form-input weather-search" type="text" id="search-input" placeholder=" Enter a city name"
                 aria-labelledby="form-heading" aria-controls="today forecast" />
               <div class="input-group-append">
                 <!--button class="btn btn-primary"-->
-                <input type="submit" class="btn search-button" id="search-button" aria-label="submit search">
-              </input>
+                <input type="submit" class="btn search-button btn-style" id="search-button" aria-label="submit search">
+                </input>
                 <hr class="hr weather-hr" />
               </div>
             </div>
           </div>
         </form>
         <div class="list-group text" id="search-history"> Search history
-          <div id="buttons-view"></div>
+          <div id="buttons-view btn-style"></div>
         </div>
       </aside>
 
@@ -52,12 +49,14 @@
             <h2 class="h3 text-center">Current Weather</h2>
             <div class="card">
               <div class="card-body">
-                <h3 id="city-name" class="card-title"></h3>
-                <p id="date" class="card-subtitle mb-2 text-muted"></p>
-                <p>
-                  <i id="weather-icon" class="wi wi-day-sunny icon"></i>
-                </p>
-                <p id="weather-text" class="card-text"></p>
+                <aside class="city-icon">
+                  <h3 id="city-name" class="card-title"></h3>
+                  <p id="date" class="card-subtitle mb-2 text-muted"></p>
+                  <p>
+                  <p id="weather-icon" class="wi wi-day-sunny icon"></p>
+                  </p>
+                </aside>
+                <p id="weather-text" class="card-text weather-description"></p>
                 <p id="temperature-celsius" class="card-text"></p>
                 <p id="temperature-feels-celsius" class="card-text"></p>
                 <p id="temperature-celsius" class="card-text"></p>
@@ -67,12 +66,12 @@
             </div>
         </section>
         <!-- 5 Day forecast -->
-        
+
         <div id="forecast" role="region" aria-live="polite">
           <div id="five-day-forecast">
             <h2 class="h3 text-center">5-Day Forecast</h2>
             <div id="forecast-cards" class="d-flex justify-content-around flex-wrap">
-            
+
               <div class="container">
                 <div class="row">
                   <div class="col-md-2">
@@ -85,7 +84,7 @@
                         <p class="card-text" id="day-one-humidity"></p>
                       </div>
                     </div>
-                    
+
                   </div>
                   <div class="col-md-2">
                     <div class="card">
@@ -113,7 +112,7 @@
                   </div>
                   <div class="col-md-2">
                     <div class="card">
-                      <div class="card-body"> 
+                      <div class="card-body">
                         <!-- Day 4 -->
                         <h6 class="card-title" id="day-four-date"></h6>
                         <p class="card-text" id="day-four-icon"></p>
@@ -151,5 +150,5 @@
   <script src="assets/script.js"></script>
   <!-- <script src="./assets/refactor.js"></script> -->
 </body>
-</html>
 
+</html>
