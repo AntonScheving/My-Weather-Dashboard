@@ -1,6 +1,3 @@
-// to catch an error
-// .catch(err => console.error(err));
-
 var history = [];
 
 function searchQuery(cityName = null) {
@@ -11,13 +8,10 @@ function searchQuery(cityName = null) {
     searchInputValue = cityName;
   }
 
-  // Begin building an object to contain our API call's query parameters
   // Set the API key
   const searchInput = $("#search-input").val().trim();
 
   const urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
-
-  // const metricTemp = "&units=metric"
 
   queryURL = queryURL + searchInput + urlApiKey;
 
@@ -50,17 +44,6 @@ historyCount = 0;
 let storedHistory = JSON.parse(localStorage.getItem("history")) || [];
 
 function updatePage(locationData) {
-  // console.log(locationData);
-  // console.log(searchHistory);
-
-  // for (let i = 0; i < locationData; i++) {
-  //   const weatherLocation = locationData[i];
-
-  // Add the current weather location to the stored history
-
-  // Save the updated history to local storage
-
-  // Loop through the stored history and render the buttons
 
   locationQueryURL = "https://api.openweathermap.org/data/2.5/weather?lat=";
 
@@ -91,20 +74,26 @@ function updatePage(locationData) {
     method: "GET",
   }).then(function (weatherData) {
     const cityName = weatherData.name + moment().format(" - Do MMMM YYYY");
-    const icon = weatherData.weather[0].icon
-    const weatherDescription = weatherData.weather[0].description;
-    const tempCelsius = "Celcius: " + Math.round(weatherData.main.temp);
-    const tempFeelsCelsius = "Feels like: " + Math.round(weatherData.main.feels_like);
-    const wind = "Wind speed: " + Math.round(weatherData.wind.speed);
-    const humidity = "Humidity: " + weatherData.main.humidity + "%";
     document.getElementById("city-name").innerText = cityName;
-    // document.getElementById("weather-icon").innerHTML = icon;
+
+    const icon = weatherData.weather[0].icon
     document.getElementById("weather-icon").innerHTML = '<img src=http://openweathermap.org/img/wn/' + icon + '@2x.png>';
+
+
+    const weatherDescription = weatherData.weather[0].description;
     document.getElementById("weather-text").innerHTML = weatherDescription;
-    document.getElementById("temperature-celsius").innerText = tempCelsius;
+
+    const tempCelsius = "Celcius: " + Math.round(weatherData.main.temp);
+        document.getElementById("temperature-celsius").innerText = tempCelsius;
+
+    const tempFeelsCelsius = "Feels like: " + Math.round(weatherData.main.feels_like);
     document.getElementById("temperature-feels-celsius").innerText =
     tempFeelsCelsius;
+
+    const wind = "Wind speed: " + Math.round(weatherData.wind.speed);
     document.getElementById("wind-speed").innerText = wind;
+
+    const humidity = "Humidity: " + weatherData.main.humidity + "%";
     document.getElementById("humidity").innerText = humidity;
   });
 
@@ -206,16 +195,12 @@ $("#search-button").on("click", function (event) {
   event.preventDefault();
   let searchInput = $("#search-input").val().trim();
 
-  // history.push(searchInput);
-
   let queryURL = searchQuery();
 
   $.ajax({
     url: queryURL,
     method: "GET",
   }).then((data) => updatePage(data));
-
- 
 
   // Function to store values in local storage
   function storeValues(searchInput) {
@@ -266,29 +251,6 @@ function renderHistoryButtons() {
 }
 renderHistoryButtons()
 
-// Function to retrieve the saved buttons from local storage
-// function renderInput() {
-//   for (let i = 9; i < 18; i++) {
-//     let textInput = localStorage.getItem("hour-" + i);
-
-//     if (!textInput) {
-//       continue;
-//     }
-
-//     $(".time-block")
-//       .eq(i - 9)
-//       .children("input")
-//       .val(textInput);
-//   }
-
-// }
-
-// function appendToHistory() {
-//   history.push("history-btn");
-
-//   renderHistoryButtons();
-// }
-
 $(document).on("click", ".history-btn", function (event) {
   // This line allows us to take advantage of the HTML "submit" property
   // This way we can hit enter on the keyboard and it registers the search
@@ -314,46 +276,3 @@ $(document).on("click", ".history-btn", function (event) {
 });
 
 searchQuery();
-
-// const historyLocalStorage = [];
-
-// // Function to save the buttons to local storage
-// function saveHistoryButtons() {
-//   localStorage.setItem("historyButtons", JSON.stringify(historyLocalStorage));
-// }
-
-// // Function to retrieve the saved buttons from local storage
-// function getHistoryButtons() {
-//   return JSON.parse(localStorage.getItem("historyButtons")) || [];
-// }
-
-// // // Function to render the history buttons
-// // function renderHistoryButtons() {
-// //   const searchHistory = $("#search-history");
-// //   searchHistory.empty();
-
-// //   const buttons = getHistoryButtons();
-// //   for (let i = 0; i < buttons.length; i++) {
-// //     const weatherLocation = buttons[i];
-// //     const historyButton = $("<button>").text(weatherLocation);
-// //     historyButton.on("click", function () {});
-// //     const historyList = $("<ul>");
-// //     historyList.append(historyButton);
-// //     searchHistory.append(historyList);
-// //     historyButton.on("click", function () {
-// //       const cityName = $(this).data("name");
-// //       searchInput.val(cityName);
-// //       searchQuery();
-// //     });
-// //   }
-// // }
-
-// // Function to add a button to the history
-// function addHistoryButton(location) {
-//   history.push(location);
-//   saveHistoryButtons();
-//   renderHistoryButtons();
-// }
-
-// // Call the renderHistoryButtons function to retrieve the saved buttons
-// renderHistoryButtons();
