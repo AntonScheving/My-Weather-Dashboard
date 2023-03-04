@@ -2,7 +2,7 @@ var history = [];
 
 function searchQuery(cityName = null) {
   // queryURL is the url we'll use to query the API
-  let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=";
+  let queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=";
 
   if (cityName) {
     searchInputValue = cityName;
