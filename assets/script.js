@@ -83,7 +83,7 @@ function updatePage(locationData) {
     const weatherDescription = weatherData.weather[0].description;
     document.getElementById("weather-text").innerHTML = weatherDescription;
 
-    const tempCelsius = "Celcius: " + Math.round(weatherData.main.temp);
+    const tempCelsius = "Celsius: " + Math.round(weatherData.main.temp);
         document.getElementById("temperature-celsius").innerText = tempCelsius;
 
     const tempFeelsCelsius = "Feels like: " + Math.round(weatherData.main.feels_like);
@@ -108,7 +108,7 @@ function updatePage(locationData) {
     const dayOneIcon = fiveDayWeatherData.list[3].weather[0].icon
     document.getElementById("day-one-icon").innerHTML = '<img src=https://openweathermap.org/img/wn/' + dayOneIcon + '.png>';
 
-    const dayOneTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[3].main.temp);
+    const dayOneTemp = "Celsius: " + Math.round(fiveDayWeatherData.list[3].main.temp);
     document.getElementById("day-one-temp").innerText = dayOneTemp;
 
     const dayOneWind = "Wind: " + Math.round(fiveDayWeatherData.list[3].wind.speed);
@@ -125,7 +125,7 @@ function updatePage(locationData) {
     const dayTwoIcon = fiveDayWeatherData.list[4].weather[0].icon
     document.getElementById("day-two-icon").innerHTML = '<img src=https://openweathermap.org/img/wn/' + dayTwoIcon + '.png>';
 
-    const dayTwoTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[4].main.temp);
+    const dayTwoTemp = "Celsius: " + Math.round(fiveDayWeatherData.list[4].main.temp);
     document.getElementById("day-two-temp").innerText = dayTwoTemp;
 
     const dayTwoWind = "Wind: " + Math.round(fiveDayWeatherData.list[4].wind.speed);
@@ -142,7 +142,7 @@ function updatePage(locationData) {
     const dayThreeIcon = fiveDayWeatherData.list[5].weather[0].icon
     document.getElementById("day-three-icon").innerHTML = '<img src=https://openweathermap.org/img/wn/' + dayThreeIcon + '.png>';
 
-    const dayThreeTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[5].main.temp);
+    const dayThreeTemp = "Celsius: " + Math.round(fiveDayWeatherData.list[5].main.temp);
     document.getElementById("day-three-temp").innerText = dayThreeTemp;
 
     const dayThreeWind = "Wind: " + Math.round(fiveDayWeatherData.list[5].wind.speed);
@@ -159,7 +159,7 @@ function updatePage(locationData) {
     const dayFourIcon = fiveDayWeatherData.list[6].weather[0].icon
     document.getElementById("day-four-icon").innerHTML = '<img src=https://openweathermap.org/img/wn/' + dayFourIcon + '.png>';
 
-    const dayFourTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[6].main.temp);
+    const dayFourTemp = "Celsius: " + Math.round(fiveDayWeatherData.list[6].main.temp);
     document.getElementById("day-four-temp").innerText = dayFourTemp;
 
     const dayFourWind = "Wind: " + Math.round(fiveDayWeatherData.list[6].wind.speed);
@@ -176,7 +176,7 @@ function updatePage(locationData) {
     const dayFiveIcon = fiveDayWeatherData.list[7].weather[0].icon
     document.getElementById("day-five-icon").innerHTML = '<img src=https://openweathermap.org/img/wn/' + dayFiveIcon + '.png>';
 
-    const dayFiveTemp = "Celcius: " + Math.round(fiveDayWeatherData.list[7].main.temp);
+    const dayFiveTemp = "Celsius: " + Math.round(fiveDayWeatherData.list[7].main.temp);
     document.getElementById("day-five-temp").innerText = dayFiveTemp;
 
     const dayFiveWind = "Wind: " + Math.round(fiveDayWeatherData.list[7].wind.speed);
@@ -233,7 +233,7 @@ function renderHistoryButtons() {
 
   // Looping through the array of history
   for (let i = 0; i < values.length; i++) {
-    // Then dynamicaly generating buttons for each search made in the array
+    // Then dynamically generating buttons for each search made in the array
     // This code $("<button>") is all jQuery needs to create the beginning and end tag. (<button></button>)
     let a = $("<button>");
     // Adding a class of history-btn to the button
@@ -260,7 +260,7 @@ $(document).on("click", ".history-btn", function (event) {
 
   const searchInput = event.target.getAttribute("data-name");
 
-  let queryURL = "http://api.openweathermap.org/geo/1.0/direct?q=";
+  let queryURL = "https://api.openweathermap.org/geo/1.0/direct?q=";
 
   const urlApiKey = "&limit=5&appid=af6cd0de4ed902410e31681b511a1063";
 
